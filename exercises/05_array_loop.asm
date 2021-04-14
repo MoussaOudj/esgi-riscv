@@ -25,7 +25,7 @@ array_g: .word 124, 256, 512, 2, 8, 4, 32, 1024
 ######################
 
 la t0, size_array_g # t0: size <- * size_array
-lw t0, 0 (t0) # t0 <- * size_array; t0 = array size
+lw t0, 0(t0) # t0 <- * size_array; t0 = array size
 
 # We need a register for the sum
 # a0: sum <- 0

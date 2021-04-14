@@ -8,16 +8,19 @@
 # Questions:
 #
 # - What does the `lw` (load word) instruction do?
+# On met la valeur d'un regsitre à une adresse precise 
 # - lw: What is the immediate use in front of the register containing the address?
+# addition de la valeur à l'adresse pour pouvoir ce deplacer ds le registre (décalage)
 # - What will lw's destination register contain?
-#
+#La valeur
 # - With an instruction like `add` what do the three registers correspond to?
 # `add reg0, reg1, reg2`
-# - reg0:
-# - reg1:
-# - reg2:
+# - reg0: destination
+# - reg1: source
+# - reg2: ce que l'on ajoute
 #
 # - `la` what is it for?
+# Load an address dans un registre 
 
 .data
 # /!\ Warning! they are global variables in memory! /!\
@@ -49,10 +52,12 @@ la t0, array_g # t0 contains the address of the array
 # To sum the array we will add manually, the content of all the cells of the
 # table.
 
-lw t1, 0​​(t0) # t1: array_g [0]
-# lw ???, 4 (???) <- TODO: To be completed!
+lw t1,0(t0) # t1: array_g [0]
+lw t2, 4 (t0)
+lw t3, 8(t0)
 # You can also add on the address which is in t0
 add a0, t1, t2 # sum = t2 + t1
+add a0, a0, t3
 
 
 # Here you have to add a0 which contains the sum with the register which will

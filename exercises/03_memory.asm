@@ -7,11 +7,17 @@
 # Questions:
 #
 # - What's the address of `num0`,` num1`, `result`?
+# 0x10010000 / 0x10010004 / 0x10010008
 # - What's the last code address of your program?
+# 0x00400030 (ecall address)
 # - How is instruction `lw t1, 0​​(t0)` quoted in machine language (hex)?
+# 0x0002a303
 # - Is memory (not registers) in the processor?
+ # Oui
 # - When you access the memory by 32-bit words, what's the step?
+# lw instruction
 # - What's the value in memory of the value at address `num0`?
+# 0x7c
 
 # Imagine a C program like this: (available in 03_memory.c)
 #
@@ -48,21 +54,23 @@ result_g: .word 0
 main:
 
 # ??? <- @ num0
-l? ???, num0_g
+la t0, num0_g
 # Load word from address 0 + register in register t1
-lw t1, 0​​(t0)
+lw t1, 0(t0)
 
 # t2 <- @ num1
-l? t2, ???
+la t2, num1_g
 # Which instruction is used to load a memory word?
-??? t3, 0(t2)
+lw t3, 0(t2)
 
 # Loading of the address of the result.
-la t4, ???
+la t4, result_g
 # Make the addition between our two registers, saving the result in another register.
-add ???, ???, ???
+add t5, t1, t3
 # Store word: store the contents of the register in the address at 0 + t4
-sw ???, 0(t4)
-
+sw t5, 0(t4)
+lw a0, 0(t4)
 # TODO: Display our two numbers in the console!
 # Hint: syscall printInt
+li a7, 1
+ecall
